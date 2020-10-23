@@ -87,14 +87,12 @@ app.post("/api/exercise/add", (req, res) => {
 });
 
 app.get("/api/exercise/log", (req, res) => {
-  User.findById(
-    req.query.userId,
-    (err, usr) => {
+  User.findById(req.query.userId, (err, usr) => {
       if (err) {
         res.send("Invalid user id");
       } else {
         let response = usr;
-        response = response.toJSON()
+        response = response.toJSON(); 
         if (req.query.from || req.query.to) {
           let from = new Date(0);
           let to = new Date();
@@ -106,12 +104,12 @@ app.get("/api/exercise/log", (req, res) => {
             to = new Date(req.query.to);
           }
 
-          from = from.getTime();
-          to = to.getTime();
+          //from = from.getTime();
+          //to = to.getTime();
 
           response.logs = response.logs.filter((session) => {
             let sessionTime = new Date(session.date).getTime();
-            return sessionTime >= from && sessionTime <= to;
+            return sessionTime >= from.getTime() && sessionTime <= to.getTime();
           })
         }
 
