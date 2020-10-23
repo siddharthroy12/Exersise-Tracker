@@ -119,6 +119,8 @@ app.get("/api/exercise/log", (req, res) => {
         }
         
         response.count = usr.logs.length;
+        response.log = usr.logs; // For FCC sake
+        response.logs = undefined;
         res.json(response);
       }
     }
