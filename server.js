@@ -98,6 +98,7 @@ app.get("/api/exercise/log", (req, res) => {
         if (req.query.from || req.query.to) {
           let from = new Date(0);
           let to = new Date();
+
           if(req.query.from) {
             from = new Date(req.query.from);
           }
@@ -108,7 +109,7 @@ app.get("/api/exercise/log", (req, res) => {
           from = from.getTime();
           to = to.getTime();
 
-          response.log = response.log.filter((session) => {
+          response.logs = response.logs.filter((session) => {
             let sessionTime = new Date(session.date).getTime();
             return sessionTime >= from && sessionTime <= to;
           })
