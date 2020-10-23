@@ -93,6 +93,7 @@ app.get("/api/exercise/log", (req, res) => {
       } else {
         let response = usr;
         response = response.toJSON(); 
+
         if (req.query.from || req.query.to) {
           let from = new Date(0);
           let to = new Date();
@@ -112,13 +113,13 @@ app.get("/api/exercise/log", (req, res) => {
             return sessionTime >= from.getTime() && sessionTime <= to.getTime();
           })
         }
-
+        
         if (req.query.limit) {
-          response.logs = response.logs.slice(0, request.query.limit);
+          response.logs = response.logs.slice(0, req.query.limit);
         }
         
         response.count = usr.logs.length;
-        response.log = usr.logs; // For FCC sake
+        response.log = response.logs; // For FCC sake
         response.logs = undefined;
         res.json(response);
       }
