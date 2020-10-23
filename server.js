@@ -94,7 +94,7 @@ app.get("/api/exercise/log", (req, res) => {
         res.send("Invalid user id");
       } else {
         let response = usr;
-
+        response = response.toJSON()
         if (req.query.from || req.query.to) {
           let from = new Date(0);
           let to = new Date();
@@ -117,7 +117,7 @@ app.get("/api/exercise/log", (req, res) => {
         if (req.query.limit) {
           response.logs = response.logs.slice(0, request.query.limit);
         }
-
+        
         response.count = usr.logs.length;
         res.json(response);
       }
